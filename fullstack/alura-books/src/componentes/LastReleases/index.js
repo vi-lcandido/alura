@@ -20,7 +20,10 @@ const NewBooksContainer = styled.div`
 function LastReleases() {
     return(
     <LastReleasesContainer>
-        <Title>Últimos Lançamentos</Title>
+        <Title 
+            color="#EB9B00" 
+            fontSize='36px' 
+        >Últimos Lançamentos</Title>
         <NewBooksContainer>
         {books.map(book => (
             <img src={book.src}/>
