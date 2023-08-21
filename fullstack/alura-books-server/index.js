@@ -1,5 +1,5 @@
 const express = require("express");
-const bookRoute = require("./rotas/livro")
+const bookRoute = require("./routes/livro")
 
 const app = express();
 
