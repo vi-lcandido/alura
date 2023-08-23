@@ -15,14 +15,36 @@ function getBookById(id) {
 
 function insertBook (newBook) {
     const books = JSON.parse(fs.readFileSync("livros.json"));
-
     const newBooksArray = [ ...books, newBook ]
 
     fs.writeFileSync("livros.json", JSON.stringify(newBooksArray))
 }
 
+function modifyBook(modifications, id) {
+    let presentBooks = JSON.parse(fs.readFileSync("livros.json"));
+    const indexFromBookToModify = presentBooks.findIndex( book => book.id === id);
+
+    // spread no objeto = modifiedContent vai ser o meu objeto presentBooks na posição indexFromBookToModify + o que vai ser passado em modifications
+    const modifiedContent = { ...presentBooks[indexFromBookToModify], ...modifications };
+
+    // aqui é a aplicação das alterações de modifiedContent em presentBooks[indexFromBookToModify], assim edita o valor com apenas o que eu quero modificar
+    presentBooks[indexFromBookToModify] = modifiedContent;
+
+    fs.writeFileSync("livros.json", JSON.stringify(presentBooks))
+
+}
+
+// function removeBook(id) {
+//     let presentBooks = JSON.parse(fs.readFileSync("livros.json"));
+//     const indexFromBookToRemove = presentBooks.indexOf(id);
+
+//     presentBooks = presentBooks.splice(indexFromBookToRemove, 1)
+
+// }
+
 module.exports = {
     getAllBooks,
     getBookById,
-    insertBook
+    insertBook,
+    modifyBook
 }
