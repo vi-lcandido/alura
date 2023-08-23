@@ -34,17 +34,23 @@ function modifyBook(modifications, id) {
 
 }
 
-// function removeBook(id) {
-//     let presentBooks = JSON.parse(fs.readFileSync("livros.json"));
-//     const indexFromBookToRemove = presentBooks.indexOf(id);
+function removeBookById(id) {
+    const books = JSON.parse(fs.readFileSync("livros.json"));
+    // const indexFromBookToRemove = newPresentBooks.findIndex( book => book.id === id );
 
-//     presentBooks = presentBooks.splice(indexFromBookToRemove, 1)
-
-// }
+    // if(indexFromBookToRemove > -1) {
+    //     newPresentBooks.splice(indexFromBookToRemove, 1);
+    //     fs.writeFileSync("livros.json", JSON.stringify(newPresentBooks));
+    // }
+    const filteredBook = books.filter( book => book.id !== id )
+    
+    fs.writeFileSync("livros.json", JSON.stringify(filteredBook));
+};
 
 module.exports = {
     getAllBooks,
     getBookById,
     insertBook,
-    modifyBook
+    modifyBook,
+    removeBookById
 }
