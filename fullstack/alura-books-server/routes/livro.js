@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { getBooks, getBook, postBook } = require("../controllers/livro");
+const { getBooks, getBook, postBook, patchBook } = require("../controllers/livro");
 
 const router = Router();
 
@@ -10,9 +10,7 @@ router.get('/:id', getBook);
 
 router.post('/', postBook);
 
-router.patch('/', (req, res) => {
-    res.send("Você fez uma requisição do tipo PATCH")
-});
+router.patch('/:id', patchBook);
 
 router.delete('/', (req, res) => {
     res.send("Você fez uma requisição do tipo DELETE")
