@@ -32,11 +32,15 @@ function postBook(req, res) {
     try {
         const newBook = req.body;
 
-        insertBook(newBook);
-
-        res.status(201);
-        res.send("Livro inserido com sucesso")
-
+        if(req.body.nome && req.body.id) {
+            insertBook(newBook);    
+            res.status(201);
+            res.send("Livro inserido com sucesso")
+        } else {
+            res.status(422)
+            res.send("Id e nome são obrigatórios")
+        }
+        
     } catch (error) {
 
         res.status(500)
@@ -75,7 +79,7 @@ function deleteBook(req, res) {
             res.status(422)
             res.send("Id inválido")
         }      
-        
+
     } catch (error) {
 
         res.status(500)
